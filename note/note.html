@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Note</title>
+  </head>
+  <body>
+    <h1>Note</h1>
+    <form id="note-form" autocomplete="off">
+      <input type="text" id="note-input" placeholder="Start typing your note" />
+      <button id="add" type="submit">Add</button>
+    </form>
+
+    <ul id="notes"></ul>
+  </body>
+
+  <template id="note-template">
+    <li class="note">
+      <p class="note-text"></p>
+      <div class="note-time"></div>
+    </li>
+  </template>
+
+  <script type="module">
+    function createNoteNode({ text, time }) {
+      const noteTemplate = document.getElementById("note-template");
+      const noteNode = noteTemplate.content.cloneNode(true);
+      noteNode.querySelector(".note-text").textContent = text;
+      noteNode.querySelector(".note-time").textContent = time;
+      return noteNode;
+    }
+
+    const storedNotesItem = window.localStorage.getItem("notesKey");
+    const notes = storedNotesItem ? JSON.parse(storedNotesItem).notes : [];
+    console.log("notes", notes, storedNotesItem);
+    notes.forEach((note) => {
+      console.log("note", note);
+      document.getElementById("notes").append(createNoteNode(note));
+    });
+
+    document.getElementById("note-form").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const noteData = {
+        text: document.getElementById("note-input").value,
+        time: new Date().toLocaleString(),
+      };
+      const noteNode = createNoteNode(noteData);
+      document.getElementById("notes").prepend(noteNode);
+      document.getElementById("note-input").value = "";
+      notes.unshift(noteData);
+      window.localStorage.setItem("notesKey", JSON.stringify({ notes }));
+      window.localStorage.setItem("youza", "hi");
+    });
+  </script>
+
+  <style>
+    body {
+      height: 100vh;
+      font-family: Verdana;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      max-width: 600px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    #note-form {
+      width: 100%;
+      display: flex;
+      gap: 5px;
+    }
+
+    #note-input {
+      flex-grow: 1;
+      height: 25px;
+      font-size: 16px;
+    }
+
+    #notes {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 0;
+    }
+
+    .note {
+      box-sizing: border-box;
+      position: relative;
+      list-style-type: none;
+      padding: 20px;
+      width: 100%;
+      text-align: left;
+      background: #efefef;
+    }
+
+    .note-text {
+      margin: 0;
+      word-wrap: break-word;
+      font-size: 16px;
+    }
+
+    .note-time {
+      color: #777;
+      position: absolute;
+      top: 0;
+      right: 5px;
+      font-size: 14px;
+    }
+  </style>
+</html>
