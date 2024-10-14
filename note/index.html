@@ -22,7 +22,7 @@
     </li>
   </template>
 
-  <script type="module">
+  <script>
     function createNoteNode({ text, time }) {
       const noteTemplate = document.getElementById("note-template");
       const noteNode = noteTemplate.content.cloneNode(true);
@@ -45,10 +45,9 @@
       };
       const noteNode = createNoteNode(noteData);
       document.getElementById("notes").prepend(noteNode);
-      document.getElementById("note-input").value = "";
+      document.getElementById("note-form").reset();
       notes.unshift(noteData);
       window.localStorage.setItem("notesKey", JSON.stringify({ notes }));
-      window.localStorage.setItem("youza", "hi");
     });
   </script>
 

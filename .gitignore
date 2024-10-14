@@ -1,0 +1,83 @@
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# compiled output
+/dist
+/tmp
+/out-tsc
+
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/project.code-snippets
+
+# misc
+/.sass-cache
+/connect.lock
+/coverage
+/libpeerconnection.log
+npm-debug.log
+yarn-error.log
+testem.log
+/typings
+
+# System Files
+.DS_Store
+Thumbs.db
+
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# testing
+/apps/main-e2e/coverage
+/apps/main-e2e/results
+/apps/main-e2e/.nyc_output/out.json
+
+# user specific private cypress environment settings
+/apps/main-e2e/cypress.env.json
+
+# production
+/build
+build-storybook.log
+
+# storybook
+/storybook-static
+
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+.eslintcache
+
+.idea/
+target/
+/*.iml
+/apps/main/src/assets/config.js
+.nx/cache
+.nx/workspace-data
+
+# Next.js
+.next
+
+# Testing certs
+/apps/main/certs/*
